@@ -71,7 +71,7 @@ class Config:
     # -------------------------------------------------------------
     API_KEY: str = os.getenv("BINANCE_API_KEY", "").strip()
     API_SECRET: str = os.getenv("BINANCE_API_SECRET", "").strip()
-    LIVE_TRADING: bool = get_env_bool("LIVE_TRADING", False)
+    LIVE_TRADING: bool = get_env_bool("LIVE_TRADING", true)
     TESTNET: bool = get_env_bool("TESTNET", False)
     BINANCE_PROXY: Optional[str] = os.getenv("BINANCE_PROXY", "").strip() or None
 
@@ -109,7 +109,7 @@ class Config:
         """Returns raw exchange symbol like BTCUSDT"""
         return cls.get_spot_symbol().replace("/", "")
 
-    # Target order notional in quote currency (USDT) - automatically enforced >= $10.0 for Binance Spot
+    # Target order notional in quote currency (USDT) - automatically enforced >= $5.8 for Binance Spot
     _raw_target_usd = get_env_float("TARGET_ORDER_USD", 11.0)
     TARGET_ORDER_USD: float = max(10.5, _raw_target_usd) if _raw_target_usd > 0 else 11.0
     MAX_POSITIONS: int = get_env_int("MAX_POSITIONS", 1)
