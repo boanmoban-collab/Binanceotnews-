@@ -1,6 +1,17 @@
+# Python cache & state
 __pycache__/
 *.pyc
 .env
 spot_state.json
 venv/
 .venv/
+
+# Node & Build files
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example

@@ -1,0 +1,6 @@
+{
+  "name": "Wife Bain Binance Spot Scalper GitHub Sync & Fixer",
+  "description": "أداة فك ضغط وتصحيح واختبار ملفات بوت التداول الفوري اللحظي بينانس سبوت ومزامنتها ودفعها إلى GitHub",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
