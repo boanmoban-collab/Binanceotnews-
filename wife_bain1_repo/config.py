@@ -109,11 +109,10 @@ class Config:
         """Returns raw exchange symbol like BTCUSDT"""
         return cls.get_spot_symbol().replace("/", "")
 
-    # Target order notional in quote currency (USDT) - automatically enforced >= $10.0 for Binance Spot
-    _raw_target_usd = get_env_float("TARGET_ORDER_USD", 11.0)
-    TARGET_ORDER_USD: float = max(10.5, _raw_target_usd) if _raw_target_usd > 0 else 11.0
+    # Target order notional in quote currency (USDT) - adjusted for low-balance Spot trading (>= $5.0)
+    _raw_target_usd = get_env_float("TARGET_ORDER_USD", 5.5)
+    TARGET_ORDER_USD: float = max(5.2, _raw_target_usd) if _raw_target_usd > 0 else 5.5
     MAX_POSITIONS: int = get_env_int("MAX_POSITIONS", 1)
-
     # -------------------------------------------------------------
     # Timing & Frequency (Real-time scalping loop)
     # -------------------------------------------------------------
@@ -142,14 +141,14 @@ class Config:
     # -------------------------------------------------------------
     # Network, Dashboard & State
     # -------------------------------------------------------------
-    PORT: int = get_env_int("PORT", 8080)
+        PORT: int = get_env_int("PORT", 8080)
     STATE_FILE: str = os.getenv("STATE_FILE", "spot_state.json")
 
     @classmethod
     def validate(cls) -> list[str]:
         errors = []
         if cls.TARGET_ORDER_USD < 5.0:
-            errors.append(f"TARGET_ORDER_USD ({cls.TARGET_ORDER_USD}) is below Binance Spot minNotional ($5). Recommended >= $10.")
+            errors.append(f"TARGET_ORDER_USD ({cls.TARGET_ORDER_USD}) is below Binance Spot minNotional ($5).")
         if cls.LOOP_INTERVAL_SEC < 1.0:
             errors.append("LOOP_INTERVAL_SEC must be >= 1.0 second.")
         if cls.STOP_LOSS_PCT <= 0:
@@ -157,8 +156,9 @@ class Config:
         if cls.TRAILING_ACTIVATION_PCT <= cls.TRAILING_CALLBACK_PCT:
             errors.append("TRAILING_ACTIVATION_PCT should be strictly greater than TRAILING_CALLBACK_PCT.")
         if cls.LIVE_TRADING:
-            if not cls.API_KEY or cls.API_KEY in ("your_binance_api_key_here", "NOT_SET"):
+            if not cls.API_KEY or cls.API_KEY in ("your_binance_api_key_here", "NOT_SET", ""):
                 errors.append("LIVE_TRADING is True, but BINANCE_API_KEY is missing or invalid.")
-            if not cls.API_SECRET or cls.API_SECRET in ("your_binance_api_secret_here", "NOT_SET"):
+            if not cls.API_SECRET or cls.API_SECRET in ("your_binance_api_secret_here", "NOT_SET", ""):
                 errors.append("LIVE_TRADING is True, but BINANCE_API_SECRET is missing or invalid.")
         return errors
+
