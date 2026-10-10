@@ -65,7 +65,7 @@ class SpotScalperEngine:
     def __init__(
         self,
         symbol: str,
-        target_order_usd: float = 11.0,
+        target_order_usd: float = 5.8,
         trailing_enabled: bool = True,
         trailing_activation_pct: float = 0.35,
         trailing_callback_pct: float = 0.15,
@@ -143,7 +143,7 @@ class SpotScalperEngine:
         if current_price <= 0:
             return 0.0
 
-        spend_usd = max(self.target_order_usd, self.min_notional * 1.05)
+        spend_usd = max(self.target_order_usd, self.min_notional)
         if available_quote_balance > 0 and available_quote_balance < spend_usd:
             spend_usd = available_quote_balance * 0.98  # Safety margin for quote balance
 

@@ -109,9 +109,9 @@ class Config:
         """Returns raw exchange symbol like BTCUSDT"""
         return cls.get_spot_symbol().replace("/", "")
 
-    # Target order notional in quote currency (USDT) - automatically enforced >= $10.0 for Binance Spot
-    _raw_target_usd = get_env_float("TARGET_ORDER_USD", 11.0)
-    TARGET_ORDER_USD: float = max(10.5, _raw_target_usd) if _raw_target_usd > 0 else 11.0
+    # Target order notional in quote currency (USDT), with Binance Spot's $5 minimum.
+    _raw_target_usd = get_env_float("TARGET_ORDER_USD", 5.8)
+    TARGET_ORDER_USD: float = max(5.0, _raw_target_usd) if _raw_target_usd > 0 else 5.8
     MAX_POSITIONS: int = get_env_int("MAX_POSITIONS", 1)
 
     # -------------------------------------------------------------
