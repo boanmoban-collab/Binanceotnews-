@@ -182,12 +182,21 @@ app.post('/api/push', async (req, res) => {
   }
 });
 
-// 5. Download Zip API
+// 5. Download Zip & Readme API
 app.get('/api/download-zip', (_req, res) => {
   if (fs.existsSync(ZIP_PATH)) {
     res.download(ZIP_PATH, 'wife_bain1-fixed.zip');
   } else {
     res.status(404).send('الملف المضغوط غير موجود');
+  }
+});
+
+app.get('/api/download-readme', (_req, res) => {
+  const readmePath = path.join(REPO_DIR, 'README.md');
+  if (fs.existsSync(readmePath)) {
+    res.download(readmePath, 'README.md');
+  } else {
+    res.status(404).send('ملف README غير موجود');
   }
 });
 

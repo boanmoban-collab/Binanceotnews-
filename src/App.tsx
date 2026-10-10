@@ -206,9 +206,17 @@ export default function App() {
         {/* Zone 3: Primary Action */}
         <div className="flex items-center gap-3 shrink-0">
           <a
+            href="/api/download-readme"
+            download="README.md"
+            className="px-3.5 py-2 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors flex items-center gap-2 whitespace-nowrap"
+          >
+            <FileCode className="w-3.5 h-3.5 text-cyan-400" />
+            تحميل README الشامل
+          </a>
+          <a
             href="/api/download-zip"
             download="wife_bain1-fixed.zip"
-            className="px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors flex items-center gap-2 whitespace-nowrap"
+            className="px-3.5 py-2 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors flex items-center gap-2 whitespace-nowrap"
           >
             <Download className="w-3.5 h-3.5 text-cyan-400" />
             تحميل ZIP المصحح
