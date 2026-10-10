@@ -1,0 +1,22 @@
+{
+  "total_realized_pnl_usd": 0.020470000000000925,
+  "total_trades_count": 1,
+  "winning_trades_count": 1,
+  "losing_trades_count": 0,
+  "last_sell_time": 1791640947.2242668,
+  "active_position": null,
+  "recent_trades": [
+    {
+      "symbol": "BTC/USDT",
+      "entry_price": 65000.0,
+      "exit_price": 65200.0,
+      "qty": 0.0002,
+      "entry_time": 1791640947.223258,
+      "exit_time": 1791640947.2242668,
+      "pnl_usd": 0.0205,
+      "pnl_pct": 0.31,
+      "exit_reason": "TRAILING_TAKE_PROFIT (Peak: +0.46%, Exit: +0.31%)"
+    }
+  ],
+  "saved_at": 1791640947.22432
+}
